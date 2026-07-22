@@ -49,11 +49,21 @@
         .news-item:hover { background: #161b22;}
         .news-time { font-size: 12px; color: var(--accent-blue); font-weight: bold; margin-bottom: 6px;}
         
-        /* Bade Fonts ke liye Micro Data Grid */
         .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 12px;}
         .data-box { background: #010409; padding: 12px; border-radius: 4px; border: 1px solid var(--panel-border); text-align: center;}
         .data-title { color: var(--text-muted); font-size: 12px; margin-bottom: 6px; font-weight: bold;}
         .data-val { font-size: 16px; font-weight: bold; font-family: monospace; color: #ffffff;}
+
+        /* Execution Center Styles */
+        .exec-center { flex:1; background: #010409; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;}
+        .exec-ticker { font-size: 64px; color: white; margin: 0 0 10px 0; font-family: monospace; letter-spacing: 2px;}
+        .exec-desc { color: var(--text-muted); margin-bottom: 40px; font-size: 14px;}
+        .btn-group { display:flex; gap: 15px; }
+        .btn { padding: 14px 28px; border-radius: 6px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s;}
+        .btn-copy { background: #161b22; color: white; border: 1px solid var(--panel-border); }
+        .btn-copy:hover { background: #1f2937; }
+        .btn-webull { background: var(--accent-blue); color: white; border: none; }
+        .btn-webull:hover { background: #234ebf; box-shadow: 0 0 15px rgba(47,129,247,0.4); }
     </style>
 </head>
 <body>
@@ -83,11 +93,16 @@
         <div class="col-mid">
             <div class="panel" style="flex: 3;">
                 <div class="panel-header" style="display: flex; justify-content: space-between;">
-                    <span>ADVANCED CHARTING & VOLUME PROFILE</span>
+                    <span>WEBULL EXECUTION COMMAND CENTER</span>
                     <span id="current-chart-label" style="color: var(--accent-blue); font-weight:bold; font-size:13px;">AAPL</span>
                 </div>
-                <div style="flex:1; background: #010409;">
-                    <iframe id="tv-frame" src="https://s.tradingview.com/widgetembed/?symbol=AAPL&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=0d1117&theme=dark&style=1" style="width:100%; height:100%; border:none;"></iframe>
+                <div class="exec-center">
+                    <h1 class="exec-ticker" id="display-ticker">AAPL</h1>
+                    <p class="exec-desc">Review signals & micro-data. Execute trades on your real-time broker.</p>
+                    <div class="btn-group">
+                        <button class="btn btn-copy" onclick="copyTicker()">📋 Copy Ticker</button>
+                        <button class="btn btn-webull" onclick="openWebull()">⚡ Open Webull Web</button>
+                    </div>
                 </div>
             </div>
             <div class="panel" style="flex: 0.8;">
@@ -110,6 +125,18 @@
 
     <script>
         let currentSymbol = "AAPL";
+        
+        // Button Functions
+        function copyTicker() {
+            navigator.clipboard.writeText(currentSymbol);
+            alert(currentSymbol + " copied to clipboard! Paste it in Webull.");
+        }
+        
+        function openWebull() {
+            // Opens Webull Web Terminal in a new tab
+            window.open('https://app.webull.com/', '_blank');
+        }
+
         const globalNewsList = [
             { time: "10:30 AM", ticker: "MACRO", imp: "HIGH", text: "Fed Chair speaks on inflation targets. Bond yields spike 5bps. Market wide impact expected.", past: "Last time yields spiked, QQQ dropped 1.2% intraday." },
             { time: "09:45 AM", ticker: "XLE", imp: "MED", text: "Crude Oil inventories lower than expected. Energy sector gaining momentum.", past: "Energy names typically rally 2% over next 4 hours." },
@@ -119,11 +146,10 @@
         function interactStock(symbol) {
             currentSymbol = symbol;
             document.getElementById('current-chart-label').innerText = symbol;
+            document.getElementById('display-ticker').innerText = symbol;
             document.getElementById('data-title').innerText = `LIVE MICRO DATA: ${symbol}`;
             document.getElementById('local-news-title').innerText = `TICKER SPECIFIC: ${symbol}`;
             
-            document.getElementById('tv-frame').src = `https://s.tradingview.com/widgetembed/?symbol=${symbol}&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=0d1117&theme=dark&style=1`;
-
             document.getElementById('deep-dive-data').innerHTML = `
                 <div class="data-box"><div class="data-title">Put/Call Ratio</div><div class="data-val" style="color:var(--yellow)">${(Math.random() * 0.8 + 0.4).toFixed(2)}</div></div>
                 <div class="data-box"><div class="data-title">ATR</div><div class="data-val">${(Math.random() * 3 + 1).toFixed(2)}</div></div>
@@ -153,7 +179,8 @@
 
         async function fetchMarketData() {
             try {
-                const response = await fetch('/api/data');
+                const response = await fetch('/api/data', {credentials: 'same-origin'});
+                if(response.status === 401) { window.location.href = '/login'; return; }
                 const data = await response.json();
 
                 if(data.breadth) {
