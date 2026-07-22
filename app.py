@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, send_file
 import random
 from datetime import datetime
-import os
 
 app = Flask(__name__)
 
@@ -9,11 +8,17 @@ setups_list = [
     {"name": "Bounce off 9 EMA", "dir": "LONG"},
     {"name": "Rejection at 200 SMA", "dir": "SHORT"},
     {"name": "VWAP Pullback Entry", "dir": "LONG"},
-    {"name": "Loss of 21 EMA Support", "dir": "SHORT"}
+    {"name": "Loss of 21 EMA Support", "dir": "SHORT"},
+    {"name": "ORB Breakout", "dir": "LONG"}
 ]
-watchlist = ["AAPL", "TSLA", "NVDA", "AMD", "MSFT"]
+watchlist = ["AAPL", "TSLA", "NVDA", "AMD", "MSFT", "META", "AMZN"]
 
-def generate_fresh_data():
+@app.route('/')
+def home():
+    return send_file('index.html')
+
+@app.route('/api/data')
+def get_data():
     curr_time = datetime.now().strftime('%H:%M:%S')
     
     breadth_data = {
@@ -41,15 +46,12 @@ def generate_fresh_data():
             "entry": f"${base:.2f}", "target": f"${tgt:.2f}", "stop": f"${stop:.2f}"
         })
 
-    return {"alerts": temp_alerts, "market": temp_market, "indices": indices_data, "breadth": breadth_data}
-
-@app.route('/')
-def home():
-    return send_file('index.html')
-
-@app.route('/api/data')
-def get_data():
-    return jsonify(generate_fresh_data())
+    return jsonify({
+        "alerts": temp_alerts, 
+        "market": temp_market, 
+        "indices": indices_data, 
+        "breadth": breadth_data
+    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
