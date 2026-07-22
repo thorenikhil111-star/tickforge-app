@@ -153,7 +153,7 @@
 
         async function fetchMarketData() {
             try {
-                const response = await fetch('/api/data');
+          const response = await fetch(window.location.origin + '/api/data');
                 if(response.status === 401) { window.location.href = '/login'; return; }
                 const data = await response.json();
 
@@ -211,7 +211,7 @@
         }
         
         setTimeout(() => interactStock("AAPL"), 500);
-        setInterval(fetchMarketData, 3000);
+        setInterval(fetchMarketData, 5000);
         fetchMarketData(); 
     </script>
 </body>
