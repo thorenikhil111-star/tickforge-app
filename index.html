@@ -10,48 +10,49 @@
             --green: #2ea043; --red: #f85149; --yellow: #d29922; --purple: #bc8cff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        body { background: var(--bg-color); color: var(--text-main); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-size: 11px; }
+        body { background: var(--bg-color); color: var(--text-main); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; font-size: 12px; }
         
         .top-bar { height: 55px; background: var(--panel-bg); border-bottom: 1px solid var(--panel-border); display: flex; align-items: center; padding: 0 15px;}
         .brand { margin-right: 20px; line-height: 1.2; }
         .logo { color: var(--accent-blue); font-size: 18px; font-weight: 900;}
         .author { color: #ffffff; font-size: 10px; font-weight: bold; text-transform: uppercase; }
         
-        .idx-box { background: #161b22; padding: 4px 10px; border-radius: 4px; font-size: 11px; margin-right: 8px; font-weight: bold; cursor: pointer; border: 1px solid transparent;}
+        .idx-box { background: #161b22; padding: 4px 10px; border-radius: 4px; font-size: 12px; margin-right: 8px; font-weight: bold; cursor: pointer; border: 1px solid transparent;}
         .idx-box:hover { border-color: var(--accent-blue); }
         .ticker-tape { display: flex; gap: 15px; flex: 1; overflow-x: auto; white-space: nowrap;}
-        .ticker-item { font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 12px;}
+        .ticker-item { font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 13px;}
         .ticker-item:hover { background: #161b22; }
         .up { color: var(--green); } .down { color: var(--red); }
 
         .workspace { display: flex; flex: 1; gap: 6px; padding: 6px; overflow: hidden; }
         .panel { background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 4px; display: flex; flex-direction: column; overflow: hidden;}
-        .panel-header { padding: 6px 10px; font-size: 10px; font-weight: bold; border-bottom: 1px solid var(--panel-border); color: var(--text-muted); background: #010409;}
+        .panel-header { padding: 8px 10px; font-size: 11px; font-weight: bold; border-bottom: 1px solid var(--panel-border); color: var(--text-muted); background: #010409;}
         
-        .col-left { flex: 1.2; display: flex; flex-direction: column; gap: 6px; min-width: 270px;}
+        .col-left { flex: 1.2; display: flex; flex-direction: column; gap: 6px; min-width: 280px;}
         .col-mid { flex: 2.5; display: flex; flex-direction: column; gap: 6px;}
-        .col-right { flex: 1.3; display: flex; flex-direction: column; gap: 6px; min-width: 280px;}
+        .col-right { flex: 1.3; display: flex; flex-direction: column; gap: 6px; min-width: 300px;}
 
-        .breadth-row { margin-bottom: 8px; cursor: pointer;}
+        .breadth-row { margin-bottom: 10px; cursor: pointer;}
         .breadth-row:hover { opacity: 0.8; }
-        .breadth-labels { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 2px; }
-        .breadth-bar { width: 100%; height: 6px; background: var(--red); border-radius: 3px; overflow: hidden; display: flex; }
+        .breadth-labels { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px; }
+        .breadth-bar { width: 100%; height: 8px; background: var(--red); border-radius: 4px; overflow: hidden; display: flex; }
         .breadth-green { height: 100%; background: var(--green); }
 
-        .alert-card { padding: 8px 10px; border-bottom: 1px solid var(--panel-border); cursor: pointer; }
+        .alert-card { padding: 12px 10px; border-bottom: 1px solid var(--panel-border); cursor: pointer; }
         .alert-card:hover { background: #161b22; border-left: 2px solid var(--accent-blue); }
-        .dir-badge { padding: 3px 6px; border-radius: 3px; font-weight: bold; font-size: 10px; margin-left: 5px; }
+        .dir-badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; margin-left: 5px; }
         .dir-long { background: rgba(46, 160, 67, 0.2); color: var(--green); }
         .dir-short { background: rgba(248, 81, 73, 0.2); color: var(--red); }
         
-        .news-item { padding: 8px; border-bottom: 1px solid var(--panel-border); cursor: pointer;}
+        .news-item { padding: 10px; border-bottom: 1px solid var(--panel-border); cursor: pointer; line-height: 1.4;}
         .news-item:hover { background: #161b22;}
-        .news-time { font-size: 10px; color: var(--accent-blue); font-weight: bold; margin-bottom: 4px;}
+        .news-time { font-size: 11px; color: var(--accent-blue); font-weight: bold; margin-bottom: 6px;}
         
-        .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 8px;}
-        .data-box { background: #010409; padding: 6px; border-radius: 3px; border: 1px solid var(--panel-border); text-align: center;}
-        .data-title { color: var(--text-muted); font-size: 9px; margin-bottom: 4px;}
-        .data-val { font-size: 11px; font-weight: bold; font-family: monospace;}
+        /* Fixed Sizes for Micro Data */
+        .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 10px;}
+        .data-box { background: #010409; padding: 10px; border-radius: 4px; border: 1px solid var(--panel-border); text-align: center;}
+        .data-title { color: var(--text-muted); font-size: 11px; margin-bottom: 6px; font-weight: bold;}
+        .data-val { font-size: 16px; font-weight: bold; font-family: monospace; color: #fff;}
     </style>
 </head>
 <body>
@@ -62,14 +63,14 @@
         </div>
         <div style="display: flex; gap: 5px;" id="spy-qqq-container"></div>
         <div class="ticker-tape" id="ticker-container">Loading Terminal...</div>
-        <a href="/logout" style="margin-left:auto; color:var(--red); text-decoration:none; font-weight:bold; border:1px solid var(--red); padding:4px 8px; border-radius:4px;">Logout</a>
+        <a href="/logout" style="margin-left:auto; color:var(--red); text-decoration:none; font-weight:bold; border:1px solid var(--red); padding:6px 12px; border-radius:4px; font-size:12px;">Logout</a>
     </div>
 
     <div class="workspace">
         <div class="col-left">
             <div class="panel" style="flex: 1;">
                 <div class="panel-header">MARKET BREADTH HEATMAP</div>
-                <div style="padding: 10px;" id="breadth-data">Connecting to exchange...</div>
+                <div style="padding: 12px;" id="breadth-data">Connecting to exchange...</div>
             </div>
             <div class="panel" style="flex: 2;">
                 <div class="panel-header">PRO SCANNERS (Live Setups)</div>
@@ -83,7 +84,7 @@
             <div class="panel" style="flex: 3;">
                 <div class="panel-header" style="display: flex; justify-content: space-between;">
                     <span>ADVANCED CHARTING & VOLUME PROFILE</span>
-                    <span id="current-chart-label" style="color: var(--accent-blue); font-weight:bold;">AAPL</span>
+                    <span id="current-chart-label" style="color: var(--accent-blue); font-weight:bold; font-size:12px;">AAPL</span>
                 </div>
                 <div style="flex:1; background: #010409;">
                     <iframe id="tv-frame" src="https://s.tradingview.com/widgetembed/?symbol=AAPL&interval=1&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=0d1117&theme=dark&style=1" style="width:100%; height:100%; border:none;"></iframe>
@@ -133,12 +134,12 @@
             document.getElementById('local-news').innerHTML = `
                 <div class="news-item" onclick="alert('Detailed News: Analysts noted strong cloud growth driving this upgrade. Target price raised by 15%.')">
                     <div class="news-time">TODAY - 09:15 AM <span style="color:var(--green); float:right;">POSITIVE</span></div>
-                    <div style="font-size: 11px;">${symbol} announces new strategic partnership. Upgraded by Morgan Stanley.</div>
-                    <div style="font-size: 9px; color: var(--text-muted); margin-top: 4px;">Past Impact: Last upgrade caused +1.8% intraday move.</div>
+                    <div style="font-size: 13px;">${symbol} announces new strategic partnership. Upgraded by Morgan Stanley.</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">Past Impact: Last upgrade caused +1.8% intraday move.</div>
                 </div>
                 <div class="news-item" onclick="alert('Detailed News: Large block of calls bought at the ask, indicating aggressive institutional positioning.')">
                     <div class="news-time">YESTERDAY - 14:30 PM <span style="color:var(--yellow); float:right;">NEUTRAL</span></div>
-                    <div style="font-size: 11px;">Options flow shows heavy sweeps in Strike calls expiring this Friday.</div>
+                    <div style="font-size: 13px;">Options flow shows heavy sweeps in Strike calls expiring this Friday.</div>
                 </div>
             `;
         }
@@ -146,7 +147,7 @@
         document.getElementById('global-news').innerHTML = globalNewsList.map(n => `
             <div class="news-item" onclick="alert('Global News Details: ${n.text}\\n\\nHistorical Impact: ${n.past}')">
                 <div class="news-time">${n.time} | ${n.ticker} <span style="color:${n.imp==='HIGH'?'var(--red)':'var(--yellow)'}; float:right;">${n.imp} IMP</span></div>
-                <div style="font-size: 11px;">${n.text}</div>
+                <div style="font-size: 13px;">${n.text}</div>
             </div>
         `).join('');
 
@@ -154,64 +155,4 @@
             try {
                 const response = await fetch('/api/data', {credentials: 'same-origin'});
                 if(response.status === 401) { window.location.href = '/login'; return; }
-                const data = await response.json();
-
-                if(data.breadth) {
-                    document.getElementById('breadth-data').innerHTML = `
-                        <div class="breadth-row" onclick="alert('Deep Dive for Index: NASDAQ\\nTotal Stocks: 100\\nTop Mover: MSFT')">
-                            <div class="breadth-labels"><span>NASDAQ Heat</span><span>${data.breadth.ndx_adv} Adv / ${data.breadth.ndx_dec} Dec</span></div>
-                            <div class="breadth-bar"><div class="breadth-green" style="width: ${(data.breadth.ndx_adv / (data.breadth.ndx_adv + data.breadth.ndx_dec))*100}%"></div></div>
-                        </div>
-                        <div class="breadth-row" onclick="alert('Deep Dive for Index: NYSE')">
-                            <div class="breadth-labels"><span>NYSE (DOW) Heat</span><span>${data.breadth.nyse_adv} Adv / ${data.breadth.nyse_dec} Dec</span></div>
-                            <div class="breadth-bar"><div class="breadth-green" style="width: ${(data.breadth.nyse_adv / (data.breadth.nyse_adv + data.breadth.nyse_dec))*100}%"></div></div>
-                        </div>
-                        <div class="breadth-row" onclick="alert('Deep Dive for Sector ETFs')">
-                            <div class="breadth-labels"><span>Sector ETFs</span><span>${data.breadth.etf_adv} Green / ${data.breadth.etf_dec} Red</span></div>
-                            <div class="breadth-bar"><div class="breadth-green" style="width: ${(data.breadth.etf_adv / (data.breadth.etf_adv + data.breadth.etf_dec))*100}%"></div></div>
-                        </div>
-                    `;
-                }
-
-                if (data.indices) {
-                    document.getElementById('spy-qqq-container').innerHTML = data.indices.map(idx => {
-                        const color = idx.change >= 0 ? 'up' : 'down';
-                        return `<div class="idx-box ${color}" onclick="interactStock('${idx.symbol}')">${idx.symbol} $${idx.price}</div>`;
-                    }).join('');
-                }
-
-                if (data.market.length > 0) {
-                    document.getElementById('ticker-container').innerHTML = data.market.map(stock => {
-                        const colorClass = stock.change >= 0 ? 'up' : 'down';
-                        return `<div class="ticker-item ${colorClass}" onclick="interactStock('${stock.symbol}')">${stock.symbol} $${stock.price} <span>${stock.change}%</span></div>`;
-                    }).join('');
-                }
-
-                if (data.alerts.length > 0) {
-                    document.getElementById('alert-container').innerHTML = data.alerts.map(alert => `
-                        <div class="alert-card" onclick="interactStock('${alert.ticker}')">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                <div>
-                                    <span style="font-weight: bold; font-size: 14px; color: #fff;">${alert.ticker}</span>
-                                    <span class="dir-badge ${alert.direction === 'LONG' ? 'dir-long' : 'dir-short'}">${alert.direction}</span>
-                                </div>
-                                <span style="font-size: 11px; color: var(--accent-blue); font-family: monospace;">${alert.time}</span>
-                            </div>
-                            <div style="font-size: 11px; color: var(--text-main); margin-bottom: 4px;">${alert.setup}</div>
-                            <div style="display: flex; justify-content: space-between; font-size: 10px; font-family: monospace; color: var(--text-muted);">
-                                <div>In: <span style="color:#fff">${alert.entry}</span></div>
-                                <div>Tgt: <span style="color:var(--green)">${alert.target}</span></div>
-                                <div>SL: <span style="color:var(--red)">${alert.stop}</span></div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            } catch (error) {}
-        }
-        
-        setTimeout(() => interactStock("AAPL"), 500);
-        setInterval(fetchMarketData, 3000);
-        fetchMarketData(); 
-    </script>
-</body>
-</html>
+                const data 
