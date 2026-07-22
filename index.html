@@ -63,7 +63,6 @@
         </div>
         <div style="display: flex; gap: 5px;" id="spy-qqq-container"></div>
         <div class="ticker-tape" id="ticker-container">Loading Terminal...</div>
-        <a href="/logout" style="margin-left:auto; color:var(--red); text-decoration:none; font-weight:bold; border:1px solid var(--red); padding:4px 8px; border-radius:4px;">Logout</a>
     </div>
 
     <div class="workspace">
@@ -153,10 +152,7 @@
 
         async function fetchMarketData() {
             try {
-                // HERE IS THE MAGIC FIX: {credentials: 'same-origin'}
-                const response = await fetch('/api/data', {credentials: 'same-origin'});
-                
-                if(response.status === 401) { window.location.href = '/login'; return; }
+                const response = await fetch('/api/data');
                 const data = await response.json();
 
                 if(data.breadth) {
@@ -213,7 +209,7 @@
         }
         
         setTimeout(() => interactStock("AAPL"), 500);
-        setInterval(fetchMarketData, 5000); // 5 sec interval 
+        setInterval(fetchMarketData, 3000);
         fetchMarketData(); 
     </script>
 </body>
