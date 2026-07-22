@@ -17,7 +17,7 @@
         .logo { color: var(--accent-blue); font-size: 18px; font-weight: 900;}
         .author { color: #ffffff; font-size: 10px; font-weight: bold; text-transform: uppercase; }
         
-        .idx-box { background: #161b22; padding: 4px 10px; border-radius: 4px; font-size: 11px; margin-right: 8px; font-weight: bold; border: 1px solid transparent; cursor: pointer;}
+        .idx-box { background: #161b22; padding: 4px 10px; border-radius: 4px; font-size: 11px; margin-right: 8px; font-weight: bold; cursor: pointer; border: 1px solid transparent;}
         .idx-box:hover { border-color: var(--accent-blue); }
         .ticker-tape { display: flex; gap: 15px; flex: 1; overflow-x: auto; white-space: nowrap;}
         .ticker-item { font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 12px;}
@@ -153,7 +153,9 @@
 
         async function fetchMarketData() {
             try {
-          const response = await fetch(window.location.origin + '/api/data');
+                // HERE IS THE MAGIC FIX: {credentials: 'same-origin'}
+                const response = await fetch('/api/data', {credentials: 'same-origin'});
+                
                 if(response.status === 401) { window.location.href = '/login'; return; }
                 const data = await response.json();
 
@@ -211,7 +213,7 @@
         }
         
         setTimeout(() => interactStock("AAPL"), 500);
-        setInterval(fetchMarketData, 5000);
+        setInterval(fetchMarketData, 5000); // 5 sec interval 
         fetchMarketData(); 
     </script>
 </body>
