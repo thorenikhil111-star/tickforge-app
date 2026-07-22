@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, send_file, request, session, redirect, url_for
+from flask import Flask, jsonify, send_file
+from flask_cors import CORS
 import threading
 import time
 import random
@@ -6,9 +7,7 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
-
-USERS_DB = {"admin": "admin123", "nikhil": "trader2024"}
+CORS(app)
 
 latest_alerts = []
 market_data = []
@@ -62,50 +61,25 @@ def scanner_loop():
                 "target": f"${tgt:.2f}", 
                 "stop": f"${stop:.2f}"
             })
-            latest_alerts = latest_alerts[:8]
+            latest_alerts = latest_alerts[:6]
             
         except Exception:
             pass
         time.sleep(3)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if request.form.get('username') in USERS_DB and USERS_DB[request.form.get('username')] == request.form.get('password'):
-            session['logged_in'] = True
-            return redirect(url_for('home'))
-        return "<div style='color:red; text-align:center; padding:20px;'>Invalid Credentials! <a href='/login'>Try Again</a></div>"
-            
-    return '''
-        <body style="background:#050505; color:white; font-family:sans-serif; display:flex; justify-content:center; align-items:center; height:100vh;">
-            <div style="background:#0d1117; padding:40px; border-radius:8px; border:1px solid #1f2937; text-align:center;">
-                <h2 style="color:#2f81f7;">TickForge AI</h2>
-                <p style="font-size:12px; color:#6e7681; margin-bottom:20px;">Restricted Access Terminal</p>
-                <form method="post">
-                    <input type="text" name="username" placeholder="Username" style="width:100%; padding:10px; margin-bottom:10px; background:#161b22; border:1px solid #30363d; color:white; border-radius:4px;"><br>
-                    <input type="password" name="password" placeholder="Password" style="width:100%; padding:10px; margin-bottom:20px; background:#161b22; border:1px solid #30363d; color:white; border-radius:4px;"><br>
-                    <button type="submit" style="width:100%; padding:10px; background:#2ea043; color:white; border:none; border-radius:4px; font-weight:bold; cursor:pointer;">Secure Login</button>
-                </form>
-            </div>
-        </body>
-    '''
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('login'))
-
 @app.route('/')
 def home():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
     return send_file('index.html')
 
 @app.route('/api/data')
 def get_data():
-    if not session.get('logged_in'):
-        return jsonify({"error": "Unauthorized"}), 401
-    return jsonify({"alerts": latest_alerts, "market": market_data, "indices": indices_data, "breadth": breadth_data})
+    # Bina kisi password ke data de dega
+    return jsonify({
+        "alerts": latest_alerts, 
+        "market": market_data, 
+        "indices": indices_data, 
+        "breadth": breadth_data
+    })
 
 if __name__ == '__main__':
     threading.Thread(target=scanner_loop, daemon=True).start()
