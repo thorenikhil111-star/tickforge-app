@@ -1,5 +1,3 @@
 Flask
-flask-cors
-yfinance
-pandas
 gunicorn
+websocket-client
